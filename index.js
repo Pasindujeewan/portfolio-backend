@@ -2,9 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import Message from "./src/model/Message.js";
+import "dotenv/config";
 
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(cors());
@@ -12,7 +13,7 @@ app.use(express.json());
 
 // MongoDB connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/messagesDB")
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error(err));
 
